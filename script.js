@@ -123,14 +123,19 @@ function imageUrl(photo) {
   return `https://images.unsplash.com/${photo}?auto=format&fit=crop&w=800&q=80`;
 }
 
-// Toast Notification
-function showToast(message, icon = "🍔") {
+// Toast Notification with Clean SVG Icons
+function showToast(message, type = "success") {
   const container = document.getElementById("toastContainer");
   if (!container) return;
 
   const toast = document.createElement("div");
   toast.className = "toast";
-  toast.innerHTML = `<span>${icon}</span><span>${message}</span>`;
+
+  const iconSvg = type === "cart"
+    ? `<svg class="toast-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>`
+    : `<svg class="toast-svg toast-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+
+  toast.innerHTML = `<span class="toast-icon-wrapper">${iconSvg}</span><span>${message}</span>`;
   container.appendChild(toast);
 
   setTimeout(() => {
@@ -139,21 +144,26 @@ function showToast(message, icon = "🍔") {
   }, 2600);
 }
 
-// Render Menu Cards
+// Render Menu Cards with Smooth Stagger Animation
 function renderFoods(category = "All") {
   const filtered = category === "All"
     ? foods
     : foods.filter(food => food.category === category);
 
-  foodGrid.innerHTML = filtered.map(food => `
-    <article class="food-card" data-id="${food.id}">
+  foodGrid.innerHTML = filtered.map((food, idx) => `
+    <article class="food-card" data-id="${food.id}" style="animation: cardEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${idx * 0.05}s both;">
       <div class="food-image-box">
         <img src="${imageUrl(food.image)}"
              alt="${food.name}"
              loading="lazy"
              onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=700&q=80'">
         <span class="food-category-badge">${food.category}</span>
-        <span class="food-rating-badge">★ ${food.rating}</span>
+        <span class="food-rating-badge">
+          <svg class="rating-star-svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+          ${food.rating}
+        </span>
       </div>
       <div class="food-info">
         <h3>${food.name}</h3>
@@ -205,12 +215,10 @@ foodGrid.addEventListener("click", event => {
   // Visual button feedback
   const originalText = button.innerHTML;
   button.innerHTML = "<span>✓ Added</span>";
-  button.style.background = "var(--primary-gradient)";
-  button.style.color = "#ffffff";
+  button.classList.add("added-active");
   setTimeout(() => {
     button.innerHTML = originalText;
-    button.style.background = "";
-    button.style.color = "";
+    button.classList.remove("added-active");
   }, 900);
 
   // Bump Badge
@@ -218,7 +226,7 @@ foodGrid.addEventListener("click", event => {
   void cartCount.offsetWidth; // trigger reflow
   cartCount.classList.add("bump");
 
-  showToast(`${foodItem.name} added to cart!`, "🛒");
+  showToast(`${foodItem.name} added to cart!`, "cart");
   renderCart();
 });
 
@@ -234,10 +242,16 @@ function renderCart() {
   if (cart.length === 0) {
     cartItems.innerHTML = `
       <div class="cart-empty">
-        <div class="cart-empty-icon">🍽️</div>
+        <div class="cart-empty-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+            <path d="M3 6h18"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+        </div>
         <h3>Your Cart is Hungry</h3>
         <p>Looks like you haven't added anything yet. Explore our mouthwatering menu!</p>
-        <button class="primary-button" id="browseMenuBtn" style="padding: 10px 20px; font-size: 14px;">
+        <button class="primary-button" id="browseMenuBtn" style="padding: 10px 22px; font-size: 14px;">
           Browse Menu
         </button>
       </div>
@@ -269,7 +283,11 @@ function renderCart() {
           <span class="qty-val">${item.quantity}</span>
           <button class="qty-btn" data-plus="${item.id}" aria-label="Increase quantity">+</button>
         </div>
-        <button class="remove-btn" data-remove="${item.id}" aria-label="Remove item">🗑️</button>
+        <button class="remove-btn" data-remove="${item.id}" aria-label="Remove item">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+          </svg>
+        </button>
       </div>
     </div>
   `).join("");
@@ -332,7 +350,6 @@ function openCheckout() {
   checkoutOverlay.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
   
-  // Clear previous validation errors
   clearValidationErrors();
 }
 
@@ -489,7 +506,7 @@ checkoutForm.addEventListener("submit", event => {
       </div>
       <div class="receipt-row">
         <span>Estimated Delivery:</span>
-        <span style="color: #10b981; font-weight: 700;">⚡ 30 - 40 Mins</span>
+        <span style="color: #10b981; font-weight: 700;">30 - 40 Mins (Express)</span>
       </div>
       <div class="receipt-row">
         <span>Grand Total (COD):</span>
@@ -531,6 +548,37 @@ orderSuccessModal.addEventListener("click", event => {
   if (event.target === orderSuccessModal) {
     closeSuccessModal();
   }
+});
+
+// Navbar Scroll Blur Effect
+window.addEventListener("scroll", () => {
+  const navbar = document.getElementById("navbar");
+  if (!navbar) return;
+  if (window.scrollY > 40) {
+    navbar.classList.add("navbar-scrolled");
+  } else {
+    navbar.classList.remove("navbar-scrolled");
+  }
+}, { passive: true });
+
+// Scroll Reveal Observer
+const revealObserver = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("in-view");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    threshold: 0.15,
+    rootMargin: "0px 0px -40px 0px"
+  }
+);
+
+document.querySelectorAll(".reveal-item, .benefit-card, .section-heading, .cta-banner").forEach(el => {
+  revealObserver.observe(el);
 });
 
 // Initial Render
