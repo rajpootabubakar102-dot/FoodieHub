@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FoodHub | Delicious Food Delivered to Your Door</title>
+  <meta name="description" content="Order freshly prepared gourmet burgers, artisan pizza, crispy chicken, and refreshing drinks delivered hot to your doorstep.">
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- Floating Toast Notifications -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- Header / Navigation -->
+  <header class="navbar">
+    <a href="#" class="logo">
+      <span class="logo-icon">🍔</span>
+      Food<span>Hub</span><span class="logo-dot">.</span>
+    </a>
+
+    <nav aria-label="Main Navigation">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#menu" class="nav-link">Menu</a>
+      <a href="#about" class="nav-link">Why Us</a>
+      <a href="#contact" class="nav-link">Order</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="cart-button" id="cartBtn" aria-label="View Shopping Cart">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-text">Cart</span>
+        <span id="cartCount" class="cart-badge">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-pulse"></span>
+          <span>⚡ FRESH FOOD • LIGHTNING DELIVERY</span>
+        </div>
+        <h1>Delicious Food,<br>Delivered to <span>Your Door.</span></h1>
+        <p class="hero-desc">
+          Indulge in freshly prepared gourmet burgers, hand-crafted pizzas, and sizzling chicken.
+          Fast, hot, and packed with irresistible flavor!
+        </p>
+        
+        <div class="hero-cta-group">
+          <a href="#menu" class="primary-button hero-btn">
+            <span>Explore Menu</span>
+            <span class="btn-arrow">→</span>
+          </a>
+          <a href="#about" class="secondary-button">
+            <span>Learn More</span>
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-num">4.9 ★</span>
+            <span class="stat-label">12k+ Reviews</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-num">30 min</span>
+            <span class="stat-label">Avg. Delivery</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-num">100%</span>
+            <span class="stat-label">Fresh & Halal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-image-wrapper">
+        <div class="hero-glow-backdrop"></div>
+        <div class="hero-image-card">
+          <img
+            src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1000&q=85"
+            alt="Signature Gourmet Double Beef Burger with melted cheddar and fresh crisp lettuce"
+            class="hero-img">
+          
+          <div class="floating-chip chip-top">
+            <span class="chip-icon">🔥</span>
+            <div>
+              <strong>Hot & Crispy</strong>
+              <small>Fresh off the grill</small>
+            </div>
+          </div>
+
+          <div class="floating-chip chip-bottom">
+            <span class="chip-icon">⭐</span>
+            <div>
+              <strong>Top Rated #1</strong>
+              <small>Customer Choice</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu-section" id="menu">
+      <div class="section-heading">
+        <span class="section-tag">CURATED TASTE</span>
+        <h2>Explore Our <span>Popular Food</span></h2>
+        <p>Crafted with premium ingredients, secret recipes, and authentic passion.</p>
+      </div>
+
+      <div class="filters" role="tablist" aria-label="Food Categories">
+        <button class="filter active" data-category="All" role="tab" aria-selected="true">
+          <span class="filter-emoji">✨</span> All Items
+        </button>
+        <button class="filter" data-category="Burger" role="tab" aria-selected="false">
+          <span class="filter-emoji">🍔</span> Burgers
+        </button>
+        <button class="filter" data-category="Pizza" role="tab" aria-selected="false">
+          <span class="filter-emoji">🍕</span> Pizzas
+        </button>
+        <button class="filter" data-category="Chicken" role="tab" aria-selected="false">
+          <span class="filter-emoji">🍗</span> Chicken
+        </button>
+        <button class="filter" data-category="Drinks" role="tab" aria-selected="false">
+          <span class="filter-emoji">🥤</span> Drinks
+        </button>
+      </div>
+
+      <div class="food-grid" id="foodGrid">
+        <!-- Dynamic Cards rendered via JS -->
+      </div>
+    </section>
+
+    <!-- Why Us / Features -->
+    <section class="about-section" id="about">
+      <div class="section-heading">
+        <span class="section-tag">THE FOODHUB DIFFERENCE</span>
+        <h2>Good Food. <span>Great Mood.</span></h2>
+        <p>We deliver an unforgettable culinary experience straight to your couch.</p>
+      </div>
+
+      <div class="benefits">
+        <article class="benefit-card">
+          <div class="benefit-icon-box">🚀</div>
+          <h3>Lightning Fast Delivery</h3>
+          <p>Thermal insulated packaging keeps your meal sizzling hot within 30 minutes.</p>
+        </article>
+
+        <article class="benefit-card">
+          <div class="benefit-icon-box">🥗</div>
+          <h3>100% Farm-Fresh</h3>
+          <p>Hand-picked daily ingredients, prime meats, and zero artificial preservatives.</p>
+        </article>
+
+        <article class="benefit-card">
+          <div class="benefit-icon-box">❤️</div>
+          <h3>Prepared with Love</h3>
+          <p>Passionate master chefs crafting every order with utmost hygiene and care.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="contact-section" id="contact">
+      <div class="cta-banner">
+        <div class="cta-content">
+          <span class="section-tag tag-white">READY TO EAT?</span>
+          <h2>Hungry? Let's Get Cooking!</h2>
+          <p>Browse our chef-crafted menu, pick your cravings, and relax while we deliver.</p>
+          <a href="#menu" class="primary-button cta-btn">
+            <span>Order Now</span>
+            <span class="btn-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <a href="#" class="logo">
+          <span class="logo-icon">🍔</span>
+          Food<span>Hub</span><span class="logo-dot">.</span>
+        </a>
+        <p class="footer-tagline">
+          The ultimate destination for mouth-watering burgers, hand-tossed pizzas, and comfort food.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#menu">Our Menu</a></li>
+          <li><a href="#about">Why FoodHub</a></li>
+          <li><a href="#contact">Order Online</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Service Areas</h4>
+        <p class="footer-text">Taxila • Wah Cantt • Islamabad • Rawalpindi • Haripur • Abbottabad</p>
+        <p class="footer-contact">📞 Hotline: <strong>0300-1234567</strong></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FoodHub. All rights reserved. Crafted for food lovers with ❤️</p>
+    </div>
+  </footer>
+
+  <!-- Cart Drawer -->
+  <aside class="cart-panel" id="cartPanel" aria-hidden="true" aria-label="Shopping Cart">
+    <div class="cart-header">
+      <div class="cart-title-wrapper">
+        <h2>Your Cart</h2>
+        <span class="cart-items-tag"><span id="cartItemsCountText">0</span> items</span>
+      </div>
+      <button id="closeCart" class="close-btn" aria-label="Close cart">✕</button>
+    </div>
+
+    <div id="cartItems" class="cart-items-body"></div>
+
+    <div class="cart-footer">
+      <div class="cart-summary-line">
+        <span>Delivery Estimate</span>
+        <span class="badge-free">Rs. 150</span>
+      </div>
+      <div class="cart-total-row">
+        <span>Subtotal</span>
+        <span class="cart-total-price">Rs. <span id="cartTotal">0</span></span>
+      </div>
+      <button id="checkoutBtn" class="primary-button checkout-trigger-btn">
+        <span>Proceed to Checkout</span>
+        <span class="btn-arrow">→</span>
+      </button>
+      <p id="cartMessage" class="cart-message" role="status"></p>
+    </div>
+  </aside>
+
+  <!-- Cart Backdrop Overlay -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+
+  <!-- Separate Checkout Modal Overlay -->
+  <div class="checkout-overlay" id="checkoutOverlay" aria-hidden="true">
+    <div class="checkout-box" role="dialog" aria-modal="true" aria-labelledby="checkoutHeading">
+      <button class="checkout-close" id="closeCheckout" type="button" aria-label="Close checkout">✕</button>
+
+      <div class="checkout-header">
+        <span class="checkout-badge">🚀 Fast Delivery Checkout</span>
+        <h2 id="checkoutHeading">Complete Your Order 🍔</h2>
+        <p>Almost there! Provide your delivery address and contact info below.</p>
+      </div>
+
+      <form id="checkoutForm" novalidate>
+        <div class="form-section">
+          <h3 class="form-section-title">
+            <span class="section-number">1</span> Customer Details
+          </h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="customerName">Full Name <span class="required">*</span></label>
+              <input type="text" id="customerName" name="customerName"
+                     placeholder="e.g. Hamza Ali"
+                     autocomplete="name" required minlength="3">
+              <span class="field-error" id="nameError"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="customerPhone">Mobile Number (WhatsApp) <span class="required">*</span></label>
+              <input type="tel" id="customerPhone" name="customerPhone"
+                     placeholder="03001234567"
+                     autocomplete="tel" pattern="^03[0-9]{9}$"
+                     title="Enter an 11-digit Pakistani mobile number starting with 03"
+                     required>
+              <span class="field-error" id="phoneError"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="customerEmail">Email Address <span class="optional">(optional)</span></label>
+            <input type="email" id="customerEmail" name="customerEmail"
+                   placeholder="hamza@example.com" autocomplete="email">
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3 class="form-section-title">
+            <span class="section-number">2</span> Delivery Location
+          </h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="customerCity">Select City <span class="required">*</span></label>
+              <select id="customerCity" name="customerCity" required>
+                <option value="">-- Choose City --</option>
+                <option value="Taxila">Taxila</option>
+                <option value="Wah Cantt">Wah Cantt</option>
+                <option value="Islamabad">Islamabad</option>
+                <option value="Rawalpindi">Rawalpindi</option>
+                <option value="Haripur">Haripur</option>
+                <option value="Abbottabad">Abbottabad</option>
+                <option value="Other">Other</option>
+              </select>
+              <span class="field-error" id="cityError"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="deliveryNotes">Special Instructions <span class="optional">(optional)</span></label>
+              <input type="text" id="deliveryNotes" name="deliveryNotes"
+                     placeholder="e.g. Ring bell, extra sauce, gate #4">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="customerAddress">Complete Street Address <span class="required">*</span></label>
+            <textarea id="customerAddress" name="customerAddress"
+                      rows="2"
+                      placeholder="House / Flat #, Street, Block, Area, Landmark"
+                      autocomplete="street-address"
+                      required minlength="8"></textarea>
+            <span class="field-error" id="addressError"></span>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3 class="form-section-title">
+            <span class="section-number">3</span> Order Summary & Bill
+          </h3>
+          <div id="checkoutItems" class="checkout-items-list"></div>
+
+          <div class="bill-breakdown">
+            <div class="checkout-total">
+              <span>Items Subtotal</span>
+              <span>Rs. <span id="checkoutSubtotal">0</span></span>
+            </div>
+
+            <div class="checkout-total">
+              <span>Delivery Charges</span>
+              <span id="deliveryBadgeContainer">Rs. <span id="checkoutDelivery">150</span></span>
+            </div>
+
+            <div class="checkout-total grand-total">
+              <span>Grand Total</span>
+              <span class="grand-price">Rs. <span id="checkoutTotal">0</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3 class="form-section-title">
+            <span class="section-number">4</span> Payment Method
+          </h3>
+
+          <div class="payment-options-grid">
+            <label class="payment-option selected">
+              <input type="radio" name="paymentMethod" value="Cash on Delivery" checked>
+              <div class="payment-option-card">
+                <span class="payment-icon">💵</span>
+                <div>
+                  <strong>Cash on Delivery (COD)</strong>
+                  <small>Pay with cash upon food arrival</small>
+                </div>
+              </div>
+            </label>
+
+            <label class="payment-option">
+              <input type="radio" name="paymentMethod" value="Bank Transfer / JazzCash">
+              <div class="payment-option-card">
+                <span class="payment-icon">💳</span>
+                <div>
+                  <strong>Online / JazzCash / Nayapay</strong>
+                  <small>Instant transfer on confirmation</small>
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="primary-button place-order-button" id="placeOrderBtn">
+          <span>Place My Order</span>
+          <span class="btn-arrow">✓</span>
+        </button>
+
+        <p id="checkoutMessage" class="checkout-error-msg" role="status"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Order Success Confirmation Modal -->
+  <div class="order-success-modal" id="orderSuccessModal" aria-hidden="true">
+    <div class="success-card">
+      <div class="success-badge-icon">🎉</div>
+      <h2>Order Confirmed!</h2>
+      <p class="success-subtitle">Thank you for ordering with FoodHub. Your delicious food is being prepared right now!</p>
+      
+      <div class="order-receipt" id="orderReceipt">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <div class="success-actions">
+        <button class="primary-button" id="successDoneBtn">Order More Delicious Food</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
