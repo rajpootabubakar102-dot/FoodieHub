@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FoodHub | Delicious Food Delivered to Your Door</title>
-  <meta name="description" content="Order freshly prepared gourmet burgers, artisan pizza, crispy chicken, and refreshing drinks delivered hot to your doorstep.">
-  
+  <meta name="description"
+    content="Order freshly prepared gourmet burgers, artisan pizza, crispy chicken, and refreshing drinks delivered hot to your doorstep.">
+
   <!-- Modern Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
+
 <body>
 
   <!-- Floating Toast Notifications -->
@@ -55,7 +60,7 @@
           Indulge in freshly prepared gourmet burgers, hand-crafted pizzas, and sizzling chicken.
           Fast, hot, and packed with irresistible flavor!
         </p>
-        
+
         <div class="hero-cta-group">
           <a href="#menu" class="primary-button hero-btn">
             <span>Explore Menu</span>
@@ -87,11 +92,9 @@
       <div class="hero-image-wrapper">
         <div class="hero-glow-backdrop"></div>
         <div class="hero-image-card">
-          <img
-            src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1000&q=85"
-            alt="Signature Gourmet Double Beef Burger with melted cheddar and fresh crisp lettuce"
-            class="hero-img">
-          
+          <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1000&q=85"
+            alt="Signature Gourmet Double Beef Burger with melted cheddar and fresh crisp lettuce" class="hero-img">
+
           <div class="floating-chip chip-top">
             <span class="chip-icon">🔥</span>
             <div>
@@ -270,27 +273,23 @@
           <div class="form-grid">
             <div class="form-group">
               <label for="customerName">Full Name <span class="required">*</span></label>
-              <input type="text" id="customerName" name="customerName"
-                     placeholder="e.g. Hamza Ali"
-                     autocomplete="name" required minlength="3">
+              <input type="text" id="customerName" name="customerName" placeholder="e.g. Hamza Ali" autocomplete="name"
+                required minlength="3">
               <span class="field-error" id="nameError"></span>
             </div>
 
             <div class="form-group">
               <label for="customerPhone">Mobile Number (WhatsApp) <span class="required">*</span></label>
-              <input type="tel" id="customerPhone" name="customerPhone"
-                     placeholder="03001234567"
-                     autocomplete="tel" pattern="^03[0-9]{9}$"
-                     title="Enter an 11-digit Pakistani mobile number starting with 03"
-                     required>
+              <input type="tel" id="customerPhone" name="customerPhone" placeholder="03001234567" autocomplete="tel"
+                pattern="^03[0-9]{9}$" title="Enter an 11-digit Pakistani mobile number starting with 03" required>
               <span class="field-error" id="phoneError"></span>
             </div>
           </div>
 
           <div class="form-group">
             <label for="customerEmail">Email Address <span class="optional">(optional)</span></label>
-            <input type="email" id="customerEmail" name="customerEmail"
-                   placeholder="hamza@example.com" autocomplete="email">
+            <input type="email" id="customerEmail" name="customerEmail" placeholder="hamza@example.com"
+              autocomplete="email">
           </div>
         </div>
 
@@ -317,17 +316,15 @@
             <div class="form-group">
               <label for="deliveryNotes">Special Instructions <span class="optional">(optional)</span></label>
               <input type="text" id="deliveryNotes" name="deliveryNotes"
-                     placeholder="e.g. Ring bell, extra sauce, gate #4">
+                placeholder="e.g. Ring bell, extra sauce, gate #4">
             </div>
           </div>
 
           <div class="form-group">
             <label for="customerAddress">Complete Street Address <span class="required">*</span></label>
-            <textarea id="customerAddress" name="customerAddress"
-                      rows="2"
-                      placeholder="House / Flat #, Street, Block, Area, Landmark"
-                      autocomplete="street-address"
-                      required minlength="8"></textarea>
+            <textarea id="customerAddress" name="customerAddress" rows="2"
+              placeholder="House / Flat #, Street, Block, Area, Landmark" autocomplete="street-address" required
+              minlength="8"></textarea>
             <span class="field-error" id="addressError"></span>
           </div>
         </div>
@@ -401,8 +398,9 @@
     <div class="success-card">
       <div class="success-badge-icon">🎉</div>
       <h2>Order Confirmed!</h2>
-      <p class="success-subtitle">Thank you for ordering with FoodHub. Your delicious food is being prepared right now!</p>
-      
+      <p class="success-subtitle">Thank you for ordering with FoodHub. Your delicious food is being prepared right now!
+      </p>
+
       <div class="order-receipt" id="orderReceipt">
         <!-- Rendered dynamically -->
       </div>
@@ -414,4 +412,5 @@
   </div>
 
 </body>
+
 </html>
